@@ -41,12 +41,7 @@ export default async function handler(
     `, id);
     
     // アクセスログの記録
-    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '';
-    await db.run(
-      `INSERT INTO access_logs (ip_hash, action, resource_id, created_at)
-       VALUES (?, ?, ?, datetime('now'))`,
-      [ip, 'view_thread', id]
-    );
+   
     
     return res.status(200).json({ 
       success: true, 

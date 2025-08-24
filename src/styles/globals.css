@@ -1,0 +1,219 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #3b82f6; /* blue-500 */
+  --primary-hover: #2563eb; /* blue-600 */
+  --secondary-color: #10b981; /* emerald-500 */
+  --secondary-hover: #059669; /* emerald-600 */
+  --danger-color: #ef4444; /* red-500 */
+  --danger-hover: #dc2626; /* red-600 */
+  --text-primary: #1f2937; /* gray-800 */
+  --text-secondary: #4b5563; /* gray-600 */
+  --text-light: #9ca3af; /* gray-400 */
+  --bg-light: #f9fafb; /* gray-50 */
+  --bg-white: #ffffff;
+  --border-color: #e5e7eb; /* gray-200 */
+  --border-focus: #93c5fd; /* blue-300 */
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  color: var(--text-primary);
+  background-color: var(--bg-light);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* カスタムコンポーネントクラス */
+@layer components {
+  /* ボタン */
+  .btn {
+    @apply px-4 py-2 rounded-md font-medium transition-all duration-200 flex items-center justify-center;
+  }
+  
+  .btn-primary {
+    @apply bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-300 focus:outline-none;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-100 text-gray-700 border border-gray-300 hover:bg-gray-200 focus:ring-2 focus:ring-gray-300 focus:outline-none;
+  }
+  
+  .btn-danger {
+    @apply bg-red-600 text-white hover:bg-red-700 focus:ring-2 focus:ring-red-300 focus:outline-none;
+  }
+  
+  .btn-success {
+    @apply bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-2 focus:ring-emerald-300 focus:outline-none;
+  }
+  
+  .btn-sm {
+    @apply px-3 py-1.5 text-sm;
+  }
+  
+  .btn-lg {
+    @apply px-6 py-3 text-lg;
+  }
+  
+  /* カード */
+  .card {
+    @apply bg-white border border-gray-200 rounded-lg shadow-sm transition-all duration-200;
+  }
+  
+  .card-hover {
+    @apply hover:border-blue-300 hover:shadow-md;
+  }
+  
+  .card-header {
+    @apply p-4 border-b border-gray-200;
+  }
+  
+  .card-body {
+    @apply p-4;
+  }
+  
+  .card-footer {
+    @apply p-4 border-t border-gray-200;
+  }
+  
+  /* フォーム要素 */
+  .form-input {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200;
+  }
+  
+  .form-label {
+    @apply block text-sm font-medium text-gray-700 mb-1;
+  }
+  
+  .form-helper {
+    @apply text-xs text-gray-500 mt-1;
+  }
+  
+  /* アラート */
+  .alert {
+    @apply p-4 rounded-lg mb-4;
+  }
+  
+  .alert-error {
+    @apply bg-red-100 border border-red-400 text-red-700;
+  }
+  
+  .alert-success {
+    @apply bg-green-100 border border-green-400 text-green-700;
+  }
+  
+  .alert-warning {
+    @apply bg-yellow-100 border border-yellow-400 text-yellow-700;
+  }
+  
+  .alert-info {
+    @apply bg-blue-100 border border-blue-400 text-blue-700;
+  }
+  
+  /* ナビゲーション */
+  .nav-link {
+    @apply text-gray-600 hover:text-gray-900 transition-colors;
+  }
+  
+  .nav-link-active {
+    @apply text-blue-600 font-medium;
+  }
+  
+  /* ローディング */
+  .loading-spinner {
+    @apply animate-spin rounded-full border-b-2 border-blue-600;
+  }
+  
+  .loading-container {
+    @apply flex justify-center items-center min-h-[200px];
+  }
+  
+  /* パンくずリスト */
+  .breadcrumb {
+    @apply flex items-center text-sm text-gray-500;
+  }
+  
+  .breadcrumb-item {
+    @apply hover:text-blue-600;
+  }
+  
+  .breadcrumb-separator {
+    @apply mx-2;
+  }
+}
+
+/* アニメーション */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.3s ease-out;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* レスポンシブ調整 */
+@media (max-width: 640px) {
+  .card-header, .card-body, .card-footer {
+    @apply p-3;
+  }
+  
+  h1 {
+    @apply text-xl;
+  }
+  
+  h2 {
+    @apply text-lg;
+  }
+  
+  .btn {
+    @apply px-3 py-1.5 text-sm;
+  }
+}
+
+/* ダークモード対応（将来的な拡張用） */
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: light;
+  }
+}

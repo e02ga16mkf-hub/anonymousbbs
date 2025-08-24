@@ -1,0 +1,31 @@
+{
+  "name": "anonymous-bbs",
+  "description": "匿名掲示板アプリケーション",
+  "repository": "https://github.com/yourusername/anonymous-bbs",
+  "logo": "https://node-js-sample.herokuapp.com/node.png",
+  "keywords": ["node", "next", "react", "sqlite"],
+  "env": {
+    "NODE_ENV": {
+      "description": "環境設定",
+      "value": "production"
+    },
+    "JWT_SECRET": {
+      "description": "JWT認証用のシークレットキー",
+      "generator": "secret"
+    },
+    "ADMIN_USERNAME": {
+      "description": "管理者ユーザー名",
+      "value": "admin"
+    },
+    "ADMIN_PASSWORD": {
+      "description": "管理者パスワード",
+      "value": "admin1234"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "addons": []
+}

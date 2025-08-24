@@ -42,7 +42,6 @@ export default async function handler(
     
     // アクセスログの記録
    
-    
     return res.status(200).json({ 
       success: true, 
       data: { thread, posts } 

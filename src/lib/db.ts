@@ -11,14 +11,19 @@ let db: Database | null = null;
 export async function getDb(): Promise<Database> {
   if (db) return db;
   
-  try {
+  try {   // Vercel環境かどうかを確認
+    const isVercel = process.env.VERCEL === '1';
     db = await open({
-      filename: DB_PATH,
-      driver: sqlite3.Database
-    });
+        // Vercel環境ではメモリ内データベースを使用
+        filename: isVercel ? ':memory:' : DB_PATH,
+        driver: sqlite3.Database
+      });
     
     // 外部キー制約を有効化
-    await db.exec('PRAGMA foreign_keys = ON');
+    await db.exec('PRAGMA foreign_keys = ON');   // Vercel環境の場合、毎回データベースを初期化する必要がある
+    if (isVercel) {
+      await initializeDb();
+    }
     
     return db;
   } catch (error) {

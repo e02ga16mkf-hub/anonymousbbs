@@ -133,12 +133,7 @@ export default async function handler(
         threadIdNum
       );
       
-      // アクセスログの記録
-      await db.run(
-        `INSERT INTO access_logs (ip_hash, action, resource_id, created_at)
-         VALUES (?, ?, ?, datetime('now'))`,
-        [hashedIp, 'create_post', threadIdNum]
-      );
+  
       
       // トランザクション確定
       await db.run('COMMIT');
@@ -156,17 +151,7 @@ export default async function handler(
   } catch (error) {
     console.error('Error creating post:', error);
     
-    // エラーログの記録
-    try {
-      const db = await getDb();
-      const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '';
-      const hashedIp = hashIP(String(ip));
-      
-      await db.run(
-        `INSERT INTO error_logs (ip_hash, error_type, error_message, created_at)
-         VALUES (?, ?, ?, datetime('now'))`,
-        [hashedIp, 'api_error', String(error)]
-      );
+   
     } catch (logError) {
       console.error('Failed to log error:', logError);
     }

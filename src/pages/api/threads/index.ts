@@ -153,11 +153,7 @@ export default async function handler(
         );
         
         // アクセスログの記録
-        await db.run(
-          `INSERT INTO access_logs (ip_hash, action, resource_id, created_at)
-           VALUES (?, ?, ?, datetime('now'))`,
-          [hashedIp, 'create_thread', threadId]
-        );
+
         
         // トランザクション確定
         await db.run('COMMIT');

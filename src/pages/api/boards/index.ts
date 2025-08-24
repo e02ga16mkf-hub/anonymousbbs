@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getDb } from '../../../lib/db';
-import { logAccess, logError } from '../../../lib/db';
 import { Board, BoardsResponse } from '../../../types';
 
 type ErrorResponse = {
@@ -42,7 +41,7 @@ export default async function handler(
     `);
     
     // アクセスログを記録
-    await logAccess(req, res);
+   
     
     // 結果を返す
     res.status(200).json({ boards });
@@ -50,9 +49,6 @@ export default async function handler(
     console.error('Error fetching boards:', error);
     
     // エラーログを記録
-    if (error instanceof Error) {
-      await logError(error);
-    }
     
     res.status(500).json({ error: 'Internal server error' });
   }

@@ -147,18 +147,15 @@ export default async function handler(
       await db.run('ROLLBACK');
       throw error;
     }
-    
-  } catch (error) {
-    console.error('Error creating post:', error);
-    
-   
-    } catch (logError) {
-      console.error('Failed to log error:', logError);
-    }
-    
-    return res.status(500).json({ 
-      success: false, 
-      error: '投稿の作成中にエラーが発生しました' 
-    });
-  }
+} catch (error) {
+  console.error('Error creating post:', error);
+  
+  // エラーログの記録 - 完全に無効化
+  
+  return res.status(500).json({ 
+    success: false, 
+    error: '投稿の作成中にエラーが発生しました' 
+  });
+}
+
 }

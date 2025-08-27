@@ -34,8 +34,8 @@ export default async function handler(
         COUNT(DISTINCT t.id) as thread_count,
         COUNT(p.id) as post_count
       FROM boards b
-      LEFT JOIN threads t ON b.id = t.board_id AND t.is_deleted = 0
-      LEFT JOIN posts p ON t.id = p.thread_id AND p.is_deleted = 0
+      LEFT JOIN threads t ON b.id = t.board_id 
+      LEFT JOIN posts p ON t.id = p.thread_id 
       GROUP BY b.id, b.name, b.description, b.category
       ORDER BY b.category, b.id
     `);

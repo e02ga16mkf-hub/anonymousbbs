@@ -33,12 +33,12 @@ export default function BoardPage() {
       }
       
       const data = await response.json();
-      setThreads(data.threads || []);
+     setThreads(data.data?.threads || []);
       
-      if (data.threads.length > 0) {
+      if (data.data?.threads && data.data.threads.length > 0) {
         setBoard({
           id: parseInt(id as string),
-          name: data.threads[0].board_name,
+          name: data.data.threads[0].board_name,
           description: '',
           category: '',
           created_at: ''
